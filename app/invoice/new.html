@@ -1,0 +1,85 @@
+
+<div ng-controller="InvoiceCtrl" class="container">
+	<div class="row">
+        <div class="col-sm-12">
+            <legend>Mr. Someone:</legend>
+        </div>
+        <!-- panel preview -->
+        <div class="col-sm-5">
+            <h4>Add payment:</h4>
+            <div class="panel panel-default">
+                <div class="panel-body form-horizontal payment-form">
+                    <div class="form-group">
+                        <label for="concept" class="col-sm-3 control-label">Company Name</label>
+                        <div class="col-sm-9">
+                            <input ng-model="invoice.company_name" type="text" class="form-control" id="company_name" name="company_name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="description" class="col-sm-3 control-label">Company Logo</label>
+                        <div class="col-sm-9">
+                            <input ng-model="invoice.company_logo" type="text" class="form-control" id="company_logo" name="company_logo">
+                        </div>
+                    </div> 
+                    <div class="form-group">
+                        <label for="amount" class="col-sm-3 control-label">Company Address</label>
+                        <div class="col-sm-9">
+                            <input ng-model="invoice.company_address" type="textarea" class="form-control" id="company_address" name="company_address">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="amount" class="col-sm-3 control-label">Customer Name</label>
+                        <div class="col-sm-9">
+                            <input ng-model="invoice.customer_name" type="text" class="form-control" id="customer_name" name="customer_name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="date" class="col-sm-3 control-label">Customer Address</label>
+                        <div class="col-sm-9">
+                            <input ng-model="invoice.customer_address" type="textarea" class="form-control" id="customer_address" name="customer_address">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12 text-right">
+                            <button ng-click="CreateInvoice($event)" type="button" class="btn btn-default preview-add-button">
+                                <span class="glyphicon glyphicon-plus"></span> Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        </div> <!-- / panel preview -->
+        <!--div class="col-sm-7">
+            <h4>Preview:</h4>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="table-responsive">
+                        <table class="table preview-table">
+                            <thead>
+                                <tr>
+                                    <th>Concept</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody--> <!-- preview content goes here-->
+                        <!--/table>
+                    </div>                            
+                </div>
+            </div>
+            <div class="row text-right">
+                <div class="col-xs-12">
+                    <h4>Total: <strong><span class="preview-total"></span></strong></h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <hr style="border:1px dashed #dddddd;">
+                    <button type="button" class="btn btn-primary btn-block">Submit all and finish</button>
+                </div>                
+            </div>
+        </div-->
+	</div>
+</div>

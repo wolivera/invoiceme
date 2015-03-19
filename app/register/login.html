@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+ 
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+ 
+    <title>Invoice Me - Log In</title>
+ 
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
+ 
+ 
+</head>
+ 
+<body >
+
+    <div ng-controller="RegisterCtrl" class="container">
+      <div class="jumbotron text-center" style="padding-bottom:0px;">
+        <h2>Sign In</h2>
+      </div>
+      <form ng-submit="SignIn($event)" class="form-signin" role="form">
+        <input ng-model="user.email" type="email" class="form-control" placeholder="Email address" required="" autofocus="">
+        <input ng-model="user.password" type="password" class="form-control" placeholder="Password" required="">
+        <label class="checkbox">
+            <a href="#/signup">Sign Up</a>
+        </label>
+        <button class="btn btn-lg btn-primary btn-block">SignIn</button>
+      </form>
+
+    </div>
+
+  
+
+</body></html>
