@@ -16,6 +16,7 @@ angular.module('myApp', [
     });
 }])
 
+
 .run( function($cookieStore, $rootScope, $location) {
 
     // register listener to watch route changes
@@ -31,16 +32,14 @@ angular.module('myApp', [
       } else if (!$rootScope.loggedUser){ // if page is refreshed we lost the reference in the root scope of the logged user
         $rootScope.loggedUser = loggedUser;
       }
+      $rootScope.currentPath = $location.path();
     });
  })
 
-.controller('AppCtrl', ['$scope', function($scope){
-    $scope.menu_toogle = "";
+.controller('AppCtrl', ['$scope', '$location', function($scope, $location){
+
+    $scope.showFooter = function(){
+        return $location.path() == '/home'
+    }
     
-    $scope.toogleMenu = function(){
-        if ($scope.menu_toogle === "active")
-            $scope.menu_toogle = "";
-        else
-            $scope.menu_toogle = "active";
-    };
 }]);
