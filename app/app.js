@@ -25,21 +25,25 @@ angular.module('myApp', [
       var loggedUser = $cookieStore.get('loggedUser');
       if(!loggedUser){ // no logged user, we should be going to #login
 
-          if (next.templateUrl != "register/login.html" && next.templateUrl != "home/home.html") {
+          if (next.templateUrl != "register/login.html" && next.templateUrl != "register/signup.html" && next.templateUrl != "home/home.html") {
             // not going to #login, we should redirect now
             $location.path( "/login" );
           }
       } else if (!$rootScope.loggedUser){ // if page is refreshed we lost the reference in the root scope of the logged user
-        $rootScope.loggedUser = loggedUser;
+          $rootScope.loggedUser = loggedUser;
       }
       $rootScope.currentPath = $location.path();
     });
  })
 
-.controller('AppCtrl', ['$scope', '$location', function($scope, $location){
+.controller('AppCtrl', ['$scope', '$location', '$cookieStore', function($scope, $location, $cookieStore){
 
     $scope.showFooter = function(){
         return $location.path() == '/home'
     }
+
+    $scope.isLoggedUser = function(){
+        return $cookieStore.get('loggedUser') != null
+    }    
     
 }]);

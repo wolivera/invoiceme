@@ -40,18 +40,29 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
+                <ul ng-hide="isLoggedUser()" class="nav navbar-nav navbar-right">
                     <li class="hidden">
                         <a href="#page-top"></a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#/home/#about">About</a>
+                        <a href="#/home/#about">Try it</a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#about">Sign Up</a>
+                        <a href="#/signup">Sign Up</a>
                     </li>
                     <li class="page-scroll">
                         <a href="#/login">Login</a>
+                    </li>
+                </ul>
+                <ul ng-show="isLoggedUser()" class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#/invoice/list">My invoices</a>
+                    </li>
+                    <li ng-controller="RegisterCtrl" class="page-scroll">
+                        <a ng-click="Logout($event)" href="#/home">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -59,11 +70,6 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
-    <div ng-controller="RegisterCtrl" style="float: right">
-        <a href="#" ng-click="Logout($event)">Logout</a>
-        <a href="#/home">Home</a>
-    </div>
 
     <div ng-view></div>
 

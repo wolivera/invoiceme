@@ -34,6 +34,17 @@ angular.module('myApp.invoice', ['ngRoute'])
 	$scope.editableInvoice = {};
 	$scope.invoice.username = username;
 	$scope.invoicesList = [];
+	$scope.invoice.items = [
+	{
+		'description': 'Example item',
+		'qty': 10,
+		'cost': 50
+	},
+	{
+		'description': 'Example item 2',
+		'qty': 5,
+		'cost': 15
+	}]
 
 	
 	postsRef.on("value", function(snapshot) {
