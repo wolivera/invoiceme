@@ -21,5 +21,11 @@ angular.module('myApp.profile', ['ngRoute'])
 
 .controller('ProfileCtrl', ['$scope', '$location', '$rootScope', '$cookieStore', function($scope, $location, $rootScope, $cookieStore) {
 
+   $scope.selected = 1;
+
+    $scope.changeTab = function(event, item){
+        event.preventDefault();
+        console.log(item)
+    }
     
 }]);
