@@ -7,6 +7,7 @@ angular.module('myApp', [
   'myApp.home',
   'myApp.register',
   'myApp.invoice',
+  'myApp.profile',
 ])
 .config(['$routeProvider', function($routeProvider) {
      // Routes will be here     
