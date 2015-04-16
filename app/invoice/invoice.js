@@ -45,6 +45,7 @@ angular.module('myApp.invoice', ['ngRoute'])
 		'qty': 5,
 		'cost': 15
 	}]
+	$scope.selectedItemList = -1;
 
 	
 	postsRef.on("value", function(snapshot) {

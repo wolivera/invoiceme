@@ -28,7 +28,9 @@ h6 {
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 700;
 }
-
+hr.invoices-list-hr{
+    border-top: 2px solid #18bc9c;
+}
 hr.star-light,
 hr.star-primary {
     margin: 25px auto 30px;
@@ -102,7 +104,7 @@ header .intro-text .skills {
 }
 
 
-@media(min-width:768px) {
+/*@media(min-width:768px) {
     header .container {
         padding-top: 200px;
         padding-bottom: 100px;
@@ -140,7 +142,7 @@ header .intro-text .skills {
         font-size: 1.5em;
     }
 }
-
+*/
 .navbar {
     text-transform: uppercase;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -482,8 +484,13 @@ height: 40px;
 }
 
 .invoice-list {
-    margin-right: 0;
-    margin-top: 120px;
+    margin-top: 100px;
+}
+
+.invoice-list .well{
+    width: 80%;
+    margin-left: 10%;
+    border: 2px solid #2c3e50;
 }
 
 .btn-sm{
@@ -516,6 +523,7 @@ height: 40px;
 
 .menu-items {
     margin: 20px;
+    width: 100%;
 }
 .btn-group {
     margin-top: 25px;
@@ -523,8 +531,6 @@ height: 40px;
     display: inline;
 }
 .form-title-menu {
-    display: inline-block;
-    margin-left: 35%;
     color: white;
 }
 .new-invoice {
@@ -532,6 +538,8 @@ height: 40px;
     padding: 40px;
     background-color: #ffffff;
     box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16);
+    width: 80%;
+    margin: auto;
 }
 
 .new-invoice form {
@@ -540,6 +548,14 @@ height: 40px;
 
 .display-i-block {
     display: inline-block;
+}
+
+.display-block {
+    display: block !important;
+}
+
+.display-none {
+    display: none;
 }
 
 .new-invoice .company-logo{
@@ -645,4 +661,72 @@ height: 40px;
     font-weight: bold;
     margin-left: 10px;
     font-size: 12px;
+}
+
+/**** invoice list ******/
+
+.user-row {
+    margin-bottom: 14px;
+}
+
+.user-row:last-child {
+    margin-bottom: 0;
+}
+
+.dropdown-user {
+    margin: 13px 0;
+    padding: 5px;
+    height: 100%;
+}
+
+.dropdown-user:hover {
+    cursor: pointer;
+}
+
+.table-user-information > tbody > tr {
+    border-top: 1px solid rgb(221, 221, 221);
+}
+
+.table-user-information > tbody > tr:first-child {
+    border-top: 0;
+}
+
+
+.table-user-information > tbody > tr > td {
+    border-top: 0;
+}
+
+.orange-circle-button {
+    box-shadow: 2px 4px 0 2px rgba(0,0,0,0.1);
+    border: .5em solid #E84D0E;
+    font-size: 1em;
+    line-height: 1.1em;
+    color: #ffffff;
+    background-color: #e84d0e;
+    margin: auto;
+    border-radius: 50%;
+    height: 7em;
+    width: 7em;
+    position: absolute;
+    left: 12%;
+}
+.orange-circle-button:hover {
+    color:#ffffff;
+    background-color: #e84d0e;
+    text-decoration: none;
+    border-color: #ff7536;
+    
+}
+.orange-circle-button:visited {
+    color:#ffffff;
+    background-color: #e84d0e;
+    text-decoration: none;
+    
+}
+.orange-circle-link-greater-than {
+    font-size: 1em;
+}
+
+.panel-footer{
+    background-color: #CCDADD;
 }

@@ -35,7 +35,7 @@
     </div>
     <a href="#/invoice/new"> NEW INVOICE
 </div-->
-<div ng-controller="InvoiceCtrl" class="container invoice-list">
+<!--div ng-controller="InvoiceCtrl" class="container invoice-list">
     <div class="container menu-items">
         <div class="row">
             <div class="btn-group" role="group" aria-label="Default button group">
@@ -72,5 +72,81 @@
             <a href="#" class="bottom"><p class="cart">Details</p></a>
         </div>
         </div>
+    </div>
+</div-->
+<div ng-controller="InvoiceCtrl" class="container invoice-list">
+    <div class="menu-items">
+        <div class="row">
+            
+            <div class="row form-title-menu">
+                <div class="col-lg-12 text-center">
+                    <a href="#/invoice/new"><button  class="btn btn-default orange-circle-button" href="">New<br />Invoice<br /><span class="orange-circle-greater-than"></span></button></a>
+                    <h2>Invoices</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+        </div>
+    </div>  
+    <div class="container">
+        <div class="well col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+            <div ng-repeat="(key, invoice) in invoicesList">
+                <div class="row user-row">
+                <div class="col-xs-3 col-sm-2 col-md-1 col-lg-1">
+                    
+                </div>
+                <div class="col-xs-8 col-sm-9 col-md-10 col-lg-10">
+                    <strong>{{ invoice.customer_name }}</strong><br>
+                    <span class="text-muted">Date: 12/05/2015</span>
+                </div>
+                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 dropdown-user">
+                    <i class="fa fa-circle-o-notch" ng-click="selectedItemList != $index ? selectedItemList = $index : selectedItemList = -1"></i>
+                </div>
+                </div>
+                <div class="row" ng-class="selectedItemList == $index ? 'display-block' : 'display-none'" >
+                    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-xs-offset-0 col-sm-offset-0 col-md-offset-1 col-lg-offset-1">
+                    <div class="panel panel-primary">
+                        
+                        <div class="panel-body">
+                            <div class="row">
+                                
+                                <div class=" col-md-12 col-lg-12">
+                                    <strong>{{ invoice.customer_name }}</strong><br>
+                                    <hr>
+                                    <table class="table table-user-information">
+                                        <tbody>
+                                        <tr>
+                                            <td>Address:</td>
+                                            <td>{{ invoice.customer_address }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Registered since:</td>
+                                            <td>11/12/2013</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Topics</td>
+                                            <td>15</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Warnings</td>
+                                            <td>0</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            
+                            <span >
+                                <button class="btn btn-md btn-warning" type="button"><i class="fa fa-pencil"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <hr class="invoices-list-hr">
+            </div>        
+        </div>
+        
     </div>
 </div>
