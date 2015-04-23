@@ -1,10 +1,9 @@
 
-<div ng-controller="InvoiceCtrl" class="container">
-	<div class="row">
+<!-- div ng-controller="InvoiceCtrl" class="container">
+    <div class="row">
         <div class="col-sm-12">
             <legend>Mr. Someone:</legend>
         </div>
-        <!-- panel preview -->
         <div class="col-sm-5">
             <h4>Add payment:</h4>
             <div class="panel panel-default">
@@ -12,42 +11,138 @@
                     <div class="form-group">
                         <label for="concept" class="col-sm-3 control-label">Company Name</label>
                         <div class="col-sm-9">
-                            <input ng-model="editableInvoice.company_name" type="text" class="form-control" id="company_name" name="company_name">
+                            <input ng-model="invoice.company_name" type="text" class="form-control" id="company_name" name="company_name">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="description" class="col-sm-3 control-label">Company Logo</label>
                         <div class="col-sm-9">
-                            <input ng-model="editableInvoice.company_logo" type="text" class="form-control" id="company_logo" name="company_logo">
+                            <input ng-model="invoice.company_logo" type="text" class="form-control" id="company_logo" name="company_logo">
                         </div>
                     </div> 
                     <div class="form-group">
                         <label for="amount" class="col-sm-3 control-label">Company Address</label>
                         <div class="col-sm-9">
-                            <input ng-model="editableInvoice.company_address" type="textarea" class="form-control" id="company_address" name="company_address">
+                            <input ng-model="invoice.company_address" type="textarea" class="form-control" id="company_address" name="company_address">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="amount" class="col-sm-3 control-label">Customer Name</label>
                         <div class="col-sm-9">
-                            <input ng-model="editableInvoice.customer_name" type="text" class="form-control" id="customer_name" name="customer_name">
+                            <input ng-model="invoice.customer_name" type="text" class="form-control" id="customer_name" name="customer_name">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="date" class="col-sm-3 control-label">Customer Address</label>
                         <div class="col-sm-9">
-                            <input ng-model="editableInvoice.customer_address" type="textarea" class="form-control" id="customer_address" name="customer_address">
+                            <input ng-model="invoice.customer_address" type="textarea" class="form-control" id="customer_address" name="customer_address">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-12 text-right">
-                            <button ng-click="EditInvoice($event)" type="button" class="btn btn-default preview-add-button">
-                                <span class="glyphicon glyphicon-plus"></span> Save
+                            <button ng-click="CreateInvoice($event)" type="button" class="btn btn-default preview-add-button">
+                                <span class="glyphicon glyphicon-plus"></span> Add
                             </button>
                         </div>
                     </div>
                 </div>
             </div>            
-        </div> 
-	</div>
+        </div>
+    </div>
+</div-->
+
+<div ng-controller="InvoiceCtrl" class="container invoice-list">
+    <div class="menu-items">
+        <div class="row">
+            
+            <div class="row form-title-menu">
+                <div class="col-lg-12 text-center">
+                    <h2>Edit Invoice</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="new-invoice">
+            <div id="my-tab-content" class="tab-content">
+                <div class="tab-pane active" id="login">
+                        <form  action="" ng-submit="NewInvoice($event)">
+                            <div class="display-i-block">
+                                <label>From</label>
+                                <input ng-model="invoice.my_company_name" type="text" class="form-control" placeholder="Your company name" required autofocus>
+                                <textarea ng-model="invoice.my_company_address" rows="5" class="form-control" placeholder="Your company address"></textarea>
+                                <br/>
+                                <label>To</label>
+                                <input ng-model="invoice.to_company_name" type="text" class="form-control" placeholder="Your company name" required>
+                                <textarea ng-model="invoice.to_company_address" rows="5" class="form-control" placeholder="Your company address"></textarea>
+                            </div>
+                            <div class="display-i-block company-logo">
+                                <!--input type='file' id="imgLogo" /-->
+                                <img ng-hide="logoRemoved" id="invoice.my_company_logo" src="img/cabin.png" alt="your image" width="150" />
+                                <br/>
+                                <div class="noPrint" ng-hide="printMode">
+                                  <a ng-click="editLogo()" href >EDIT</a> /
+                                  <a ng-click="removeLogo()" id="remove_logo" href >REMOVE </a>
+                                </div>
+                                <br/>
+                                <div class="invoice-date">
+                                    <label>Date Issued</label>
+                                    <input ng-model="invoice.to_company_name" type="date" class="form-control" placeholder="Your company name" required autofocus>
+                                    <br/>
+                                    <label>Payment Due</label>
+                                    <input ng-model="invoice.to_company_name" type="date" class="form-control" placeholder="Your company name" required >
+                                </div>
+
+                            </div>
+                            <table class="table table-striped invoice-items" align="center" >
+                                  <tr>
+                                      
+                                      <th>Description</th>
+                                      <th>Qty</th>
+                                      <th>Cost</th>
+                                      <th >Total</th>
+                                      <th style="text-align:right;"></th>
+                                  </tr>
+                                  <tr ng-repeat="item in invoice.items" jq:animate="dropdown;250">
+                                      
+                                      <td><input ng-model="item.description" placeholder="Description"></td>
+                                      <td><input ng-model="item.qty" value="1" size="4" ng:required ng:validate="integer" placeholder="qty"></td>
+                                      <td><input ng-model="item.cost" value="0.00" ng:required ng:validate="number" size="6" placeholder="cost"></td>
+                                      <td>{{item.cost * item.qty | currency}}</td>
+                                      <td align="right"><button ng-click="removeItem(item)" type="button" class="btn btn-danger btn-circle"><i class="fa fa-trash-o"></i></button></td>
+                                  </tr>                                      
+                                  <tr class="invoice-new-item" ng-hide="printMode">
+                                      <td><button ng-click="removeItem(item)" type="button" class="btn btn-success btn-circle btn-xl"><i class="fa fa-plus"></i></button>
+                                        <span>ADD NEW ITEM</span>
+                                      </td>                                          
+                                  </tr>
+                                  
+                            </table>
+                            <hr/>
+                            <div class="display-i-block">
+                                <label>Comments</label>
+                                <textarea ng-model="invoice.my_company_address" rows="5" cols="40" class="form-control" placeholder="Your company address"></textarea>
+                            </div>
+
+                            <div class="display-i-block invoice-total">
+                                <label>Subtotal</label>
+                                <input ng-model="invoice.subtotal" type="text" class="form-control"  readonly autofocus>
+                                <br/>
+                                <label>Tax (%)</label>
+                                <input ng-model="invoice.tax" type="text" class="form-control"  readonly >
+                                <br/>
+                                <label>Total</label>
+                                <input ng-model="invoice.total" type="text" class="form-control"  readonly autofocus>
+                                
+                            </div>
+                            <div class="invoice-actions">
+                                <input class="btn btn-md btn-default" value="Save" />
+                                <input class="btn btn-md btn-default" value="Print" />
+                            </div>
+                        </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

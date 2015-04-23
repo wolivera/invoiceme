@@ -79,7 +79,8 @@
                             </div>
                             <div class="display-i-block company-logo">
                                 <!--input type='file' id="imgLogo" /-->
-                                <img ng-hide="logoRemoved" id="invoice.my_company_logo" src="img/cabin.png" alt="your image" width="150" />
+                                <input type='file' fileread="my_company_logo" id="my_company_logo"/>
+                                <img ng-hide="logoRemoved" id="company_logo" src="img/cabin.png" alt="Your image" width="150" />
                                 <br/>
                                 <div class="noPrint" ng-hide="printMode">
                                   <a ng-click="editLogo()" href >EDIT</a> /
@@ -88,10 +89,10 @@
                                 <br/>
                                 <div class="invoice-date">
                                     <label>Date Issued</label>
-                                    <input ng-model="invoice.to_company_name" type="date" class="form-control" placeholder="Your company name" required autofocus>
+                                    <input ng-model="invoice.date_issued" type="date" class="form-control" placeholder="Your company name" required autofocus>
                                     <br/>
                                     <label>Payment Due</label>
-                                    <input ng-model="invoice.to_company_name" type="date" class="form-control" placeholder="Your company name" required >
+                                    <input ng-model="invoice.payment_due" type="date" class="form-control" placeholder="Your company name" required >
                                 </div>
 
                             </div>
@@ -106,14 +107,16 @@
                                   </tr>
                                   <tr ng-repeat="item in invoice.items" jq:animate="dropdown;250">
                                       
-                                      <td><input ng-model="item.description" placeholder="Description"></td>
-                                      <td><input ng-model="item.qty" value="1" size="4" ng:required ng:validate="integer" placeholder="qty"></td>
-                                      <td><input ng-model="item.cost" value="0.00" ng:required ng:validate="number" size="6" placeholder="cost"></td>
-                                      <td>{{item.cost * item.qty | currency}}</td>
-                                      <td align="right"><button ng-click="removeItem(item)" type="button" class="btn btn-danger btn-circle"><i class="fa fa-trash-o"></i></button></td>
+                                        <td><input ng-model="item.description" placeholder="Description"></td>
+                                        <td><input ng-model="item.qty" value="1" size="4" ng:required ng:validate="integer" placeholder="qty"></td>
+                                        <td><input ng-model="item.cost" value="0.00" ng:required ng:validate="number" size="6" placeholder="cost"></td>
+                                        <td>{{item.cost * item.qty | currency}}</td>
+                                        <td align="right">
+                                            <button ng-click="removeItem(item)" type="button" class="btn btn-danger btn-circle"><i class="fa fa-trash-o"></i></button>
+                                        </td>
                                   </tr>                                      
                                   <tr class="invoice-new-item" ng-hide="printMode">
-                                      <td><button ng-click="removeItem(item)" type="button" class="btn btn-success btn-circle btn-xl"><i class="fa fa-plus"></i></button>
+                                      <td><button ng-click="addItem()" type="button" class="btn btn-success btn-circle btn-xl"><i class="fa fa-plus"></i></button>
                                         <span>ADD NEW ITEM</span>
                                       </td>                                          
                                   </tr>
@@ -122,7 +125,7 @@
                             <hr/>
                             <div class="display-i-block">
                                 <label>Comments</label>
-                                <textarea ng-model="invoice.my_company_address" rows="5" cols="40" class="form-control" placeholder="Your company address"></textarea>
+                                <textarea ng-model="invoice.comments" rows="5" cols="40" class="form-control" placeholder="Your company address"></textarea>
                             </div>
 
                             <div class="display-i-block invoice-total">
@@ -130,7 +133,7 @@
                                 <input ng-model="invoice.subtotal" type="text" class="form-control"  readonly autofocus>
                                 <br/>
                                 <label>Tax (%)</label>
-                                <input ng-model="invoice.tax" type="text" class="form-control"  readonly >
+                                <input ng-model="invoice.tax" type="text" class="form-control" >
                                 <br/>
                                 <label>Total</label>
                                 <input ng-model="invoice.total" type="text" class="form-control"  readonly autofocus>

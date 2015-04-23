@@ -663,6 +663,10 @@ height: 40px;
     font-size: 12px;
 }
 
+#my_company_logo{
+    display: none;
+}
+
 /**** invoice list ******/
 
 .user-row {

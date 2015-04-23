@@ -64,7 +64,35 @@ angular.module('myApp.invoice', ['ngRoute'])
 	function (errorObject) {
 	  console.log("The read failed: " + errorObject.code);
 	});
+
+    $scope.removeLogo = function(element) {
+        var elem = angular.element("#remove_logo");
+        if(elem.text() == "Show"){
+          elem.text("Remove");
+          $scope.logoRemoved = false;
+        }
+        else{
+          elem.text("Show");
+          $scope.logoRemoved = true;
+        }
+
+    }
+
+    $scope.editLogo = function(){
+    	$("#my_company_logo").trigger("click");
+    }
+
+    $scope.showLogo = function() {
+        $scope.logoRemoved = false;
+    }
+
+	$scope.addItem = function() {
+        $scope.invoice.items.push({qty:0, cost:0, description:""});    
+    }
 	
+	$scope.removeItem = function(item) {
+        $scope.invoice.items.splice($scope.invoice.items.indexOf(item), 1);    
+    }
 
 	$scope.CreateInvoice = function(e){ 
 	    e.preventDefault();
@@ -106,3 +134,23 @@ angular.module('myApp.invoice', ['ngRoute'])
             }
         };
 }])
+
+.directive("fileread", [function () {
+    return {
+        scope: {
+            fileread: "="
+        },
+        link: function (scope, element, attributes) {
+            element.bind("change", function (changeEvent) {
+                var reader = new FileReader();
+                reader.onload = function (loadEvent) {
+                    scope.$apply(function () {
+                        scope.fileread = loadEvent.target.result;
+                        $('#company_logo').attr('src', loadEvent.target.result);
+                    });
+                }
+                reader.readAsDataURL(changeEvent.target.files[0]);
+            });
+        }
+    }
+}]);

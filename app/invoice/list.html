@@ -138,7 +138,15 @@
                         <div class="panel-footer">
                             
                             <span >
-                                <button class="btn btn-md btn-warning" type="button"><i class="fa fa-pencil"></i></button>
+                                <button class="btn btn-md btn-info" type="button"><i class="fa fa-eye"></i></button>
+                            </span>
+                            <span >
+                                <a href="#/invoice/edit/{{key}}">
+                                    <button class="btn btn-md btn-warning" type="button"><i class="fa fa-pencil"></i></button>
+                                </a>
+                            </span>
+                            <span >
+                                <button class="btn btn-md btn-danger" type="button" ng-click="DeleteInvoice($event, key)" ng-confirm-click="Are you sure you want to delete this invoice?"><i class="fa fa-trash"></i></button>
                             </span>
                         </div>
                     </div>
