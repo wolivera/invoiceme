@@ -67,20 +67,20 @@
         <div class="new-invoice">
             <div id="my-tab-content" class="tab-content">
                 <div class="tab-pane active" id="login">
-                        <form  action="" ng-submit="NewInvoice($event)">
+                        <form  action="">
                             <div class="display-i-block">
                                 <label>From</label>
                                 <input ng-model="invoice.my_company_name" type="text" class="form-control" placeholder="Your company name" required autofocus>
                                 <textarea ng-model="invoice.my_company_address" rows="5" class="form-control" placeholder="Your company address"></textarea>
                                 <br/>
                                 <label>To</label>
-                                <input ng-model="invoice.to_company_name" type="text" class="form-control" placeholder="Your company name" required>
-                                <textarea ng-model="invoice.to_company_address" rows="5" class="form-control" placeholder="Your company address"></textarea>
+                                <input ng-model="invoice.to_company_name" type="text" class="form-control" placeholder="Customer name" required>
+                                <textarea ng-model="invoice.to_company_address" rows="5" class="form-control" placeholder="Customer address"></textarea>
                             </div>
                             <div class="display-i-block company-logo">
                                 <!--input type='file' id="imgLogo" /-->
                                 <input type='file' fileread="my_company_logo" id="my_company_logo"/>
-                                <img ng-hide="logoRemoved" id="company_logo" src="img/cabin.png" alt="Your image" width="150" />
+                                <img ng-hide="logoRemoved" ng-model="invoice.my_company_logo" id="company_logo" src="img/cabin.png" alt="Your image" width="150" />
                                 <br/>
                                 <div class="noPrint" ng-hide="printMode">
                                   <a ng-click="editLogo()" href >EDIT</a> /
@@ -105,7 +105,7 @@
                                       <th >Total</th>
                                       <th style="text-align:right;"></th>
                                   </tr>
-                                  <tr ng-repeat="item in invoice.items" jq:animate="dropdown;250">
+                                  <tr ng-repeat="item in invoice.items track by $index" jq:animate="dropdown;250">
                                       
                                         <td><input ng-model="item.description" placeholder="Description"></td>
                                         <td><input ng-model="item.qty" value="1" size="4" ng:required ng:validate="integer" placeholder="qty"></td>
@@ -130,18 +130,17 @@
 
                             <div class="display-i-block invoice-total">
                                 <label>Subtotal</label>
-                                <input ng-model="invoice.subtotal" type="text" class="form-control"  readonly autofocus>
+                                <input ng-model="invoice.subtotal" type="text" class="form-control"  readonly autofocus value="{{getSubTotal()}}">
                                 <br/>
                                 <label>Tax (%)</label>
-                                <input ng-model="invoice.tax" type="text" class="form-control" >
+                                <input value="0.00" ng:validate="number" ng-model="invoice.tax" type="text" class="form-control">
                                 <br/>
                                 <label>Total</label>
-                                <input ng-model="invoice.total" type="text" class="form-control"  readonly autofocus>
+                                <input ng-model="invoice.total" type="text" class="form-control"  readonly autofocus value="{{getGrandTotal()}}">
                                 
                             </div>
                             <div class="invoice-actions">
-                                <input class="btn btn-md btn-default" value="Save" />
-                                <input class="btn btn-md btn-default" value="Print" />
+                                <input class="btn btn-md btn-default" ng-click="CreateInvoice($event)" value="Save" />
                             </div>
                         </form>
                 </div>

@@ -25,17 +25,17 @@
                     <div id="my-tab-content" class="tab-content">
                         <div class="tab-pane" ng-class="{'active' : selected == 1 }" ng-click="selected=1"  id="login">
                             <form class="form-signin" action="" method="">
-                              <input type="text" class="form-control" placeholder="Your name" required autofocus>
-                              <input type="text" class="form-control" placeholder="Your last name" required>
-                              <input type="submit" class="btn btn-md btn-default btn-block" value="Update" />
+                              <input ng-model="user.email" type="text" class="form-control" required autofocus>
+                              <input ng-model="user.newemail" type="text" class="form-control" placeholder="Confirm new email" required>
+                              <input ng-click="ChangeUsername()" type="submit" class="btn btn-md btn-default btn-block" value="Update" />
                             </form>
                         </div>
                         <div class="tab-pane" ng-class="{'active' : selected == 2 }" ng-click="selected=2" id="profile">
                           <form class="form-signin" action="" method="">
-                              <input type="password" class="form-control" placeholder="Old password" required autofocus>
-                              <input type="text" class="form-control" placeholder="New password" required>
-                              <input type="text" class="form-control" placeholder="Confirm new password" required>
-                              <input type="submit" class="btn btn-md btn-default btn-block" value="Update" />
+                              <input ng-model="user.old_password" type="password" class="form-control" placeholder="Old password" required autofocus>
+                              <input ng-model="user.new_password" type="text" class="form-control" placeholder="New password" required>
+                              <input ng-model="user.new_password_confirm" type="text" class="form-control" placeholder="Confirm new password" required>
+                              <input ng-click="ChangePassword()" type="submit" class="btn btn-md btn-default btn-block" value="Update" />
                           </form>
                         </div>            
                      </div>

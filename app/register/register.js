@@ -34,6 +34,7 @@ angular.module('myApp.register', ['ngRoute', 'ngCookies'])
 		function(error, authData) {
 		  if (error) {
 		    console.log("Login Failed!", error);
+		    return alert(error.message)
 		  } else {
 		    console.log("Authenticated successfully with payload:", authData);
 
@@ -48,11 +49,15 @@ angular.module('myApp.register', ['ngRoute', 'ngCookies'])
 
 	$scope.SignUp = function(e){ 
 	    e.preventDefault();
+
 	    var username = $scope.user.email,
 	    	password = $scope.user.password,
-	    	name = $scope.user.name,
-	    	lastName = $scope.user.lastName;
+	    	passwordConfirm = $scope.user.password_confirm;
 
+	    if(!username)
+	    	return alert("Email required")
+	    if(password !== passwordConfirm)
+	    	return alert("Passwords doesn't match")
 
 	    firebaseRef.createUser({
 		  	email    : username,
@@ -61,8 +66,18 @@ angular.module('myApp.register', ['ngRoute', 'ngCookies'])
 		function(error) {
 		  	if (error === null) {
 		    	console.log("User created successfully");
+		    	var authData = {
+		    		password: {
+			    		email: username
+			    	}
+		    	}
+		    	$rootScope.loggedUser = authData; // save logged user into rootscope
+			    $cookieStore.put('loggedUser', authData); // save session in cookies for page refresh
+			    $location.path('/invoice/list').replace();
+			    $scope.$apply();
 			} else {
 			    console.log("Error creating user:", error);
+			    return alert(error.message)
 			}
 		});
 	}

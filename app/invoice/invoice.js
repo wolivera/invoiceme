@@ -17,6 +17,10 @@ angular.module('myApp.invoice', ['ngRoute'])
         templateUrl: 'invoice/edit.html',
         controller: 'InvoiceCtrl'
     })
+    .when('/invoice/print/:id', {
+        templateUrl: 'invoice/print.html',
+        controller: 'InvoiceCtrl'
+    })
     .otherwise('/feed', {
         templateUrl: 'feed/feed.html',
         controller: 'FeedCtrl'
@@ -24,7 +28,7 @@ angular.module('myApp.invoice', ['ngRoute'])
 }])
 
 // RegisterCtrl controller
-.controller('InvoiceCtrl', ['$scope', '$rootScope', '$location', '$timeout', '$routeParams', function($scope, $rootScope, $location, $timeout, $routeParams) {
+.controller('InvoiceCtrl', ['$scope', '$rootScope', '$location', '$timeout', '$routeParams', '$window', function($scope, $rootScope, $location, $timeout, $routeParams, $window) {
 
 	var firebaseRef = new Firebase("https://myinvoice.firebaseio.com");
 	var postsRef = firebaseRef.child("posts");
@@ -46,15 +50,19 @@ angular.module('myApp.invoice', ['ngRoute'])
 		'cost': 15
 	}]
 	$scope.selectedItemList = -1;
+    $scope.invoice.tax = 0.00;
+    $scope.emptyList = false;
 
 	
 	postsRef.on("value", function(snapshot) {
 		$timeout(function(){
 			$scope.invoicesList = snapshot.val();
+            $scope.emptyList = $scope.invoicesList.length == 0;
 			//if edit mode then search for invoice to edit
 			if($routeParams.id){
 				if($scope.invoicesList[$routeParams.id]){ // if route is not correct then redirect to list
-					$scope.editableInvoice = $scope.invoicesList[$routeParams.id]
+					//$scope.editableInvoice = $scope.invoicesList[$routeParams.id]
+                    $scope.invoice = $scope.invoicesList[$routeParams.id]
 				} else {
 					$location.path('/invoice/list').replace();
 				}
@@ -96,7 +104,7 @@ angular.module('myApp.invoice', ['ngRoute'])
 
 	$scope.CreateInvoice = function(e){ 
 	    e.preventDefault();
-
+        //$scope.invoice.company_logo = $scope.fileread;
 	    postsRef.push($scope.invoice);
 	    $location.path('/invoice/list').replace();
 		$scope.$apply();
@@ -106,34 +114,53 @@ angular.module('myApp.invoice', ['ngRoute'])
 		e.preventDefault();
 
 		var itemRef = postsRef.child($routeParams.id);
-		itemRef.update($scope.editableInvoice);
+		itemRef.update($scope.invoice);
 		$location.path('/invoice/list').replace();
 	}
 
 	$scope.DeleteInvoice = function(e, key){
 		e.preventDefault();
 
-		var itemRef = postsRef.child(key);
-		itemRef.remove();
-		$location.path('/invoice/list').replace();
+        var result = $window.confirm("Are you sure you want to remove this invoice?");
+        if (result) {
+    		var itemRef = postsRef.child(key);
+    		itemRef.remove();
+    		$location.path('/invoice/list').replace();
+        }
 	}
 
+    $scope.getSubTotal = function() {
+        var total = 0.00;
+        angular.forEach($scope.invoice.items, function(item, key){
+          total += (item.qty * item.cost);
+        });
+        return total;
+    }
+    $scope.getTax = function() {
+        return (($scope.invoice.tax * $scope.getSubTotal())/100);
+    }
+    $scope.getGrandTotal = function() {
+        //localStorage["invoice"] = JSON.stringify($scope.invoice);
+        return $scope.getTax() + $scope.getSubTotal();
+    }
+
+    $scope.calculateTotal = function(invoice){
+        var subTotal = 0.00;
+        angular.forEach(invoice.items, function(item, key){
+          subTotal += (item.qty * item.cost);
+        });        
+        var tax = (parseInt(invoice.tax) * subTotal)/100;
+        console.log(invoice.tax)
+        console.log(tax)
+        return tax + subTotal;
+    }
+
+    $scope.Print = function(){
+        $window.print();
+    } 
+
 }])
 
-.directive('ngConfirmClick', [
-    function(){
-        return {
-            link: function (scope, element, attr) {
-                var msg = attr.ngConfirmClick || "Are you sure?";
-                var clickAction = attr.confirmedClick;
-                element.bind('click',function (event) {
-                    if ( window.confirm(msg) ) {
-                        scope.$eval(clickAction)
-                    }
-                });
-            }
-        };
-}])
 
 .directive("fileread", [function () {
     return {

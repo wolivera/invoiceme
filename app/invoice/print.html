@@ -1,0 +1,86 @@
+<div ng-controller="InvoiceCtrl" class="container invoice-list">
+    <div class="menu-items no-print">
+        <div class="row">
+            
+            <div class="row form-title-menu">
+                <div class="col-lg-12 text-center">
+                    <h2>Print preview</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="new-invoice">
+            <div id="my-tab-content" class="tab-content">
+                <div class="tab-pane active" id="login">
+                        <form  action="">
+                            <div class="display-i-block">
+                                <div style="min-height: 150px;">
+                                    <label>From</label>
+                                    <p>{{invoice.my_company_name}}</p>
+                                    <p>{{invoice.my_company_address}}</p>
+                                </div>
+                                <br/>
+                                <div style="min-height: 150px;">
+                                    <label>To</label>
+                                    <p>{{invoice.to_company_name}}</p>
+                                    <p>{{invoice.to_company_address}}</p>
+                                </div>
+                                <br/>
+                            </div>
+                            <div class="display-i-block company-logo">
+                                <img ng-hide="logoRemoved" ng-model="invoice.my_company_logo" id="company_logo" src="img/cabin.png" alt="Your image" width="150" />
+                                <br/>
+                                <div class="invoice-date" style="margin-top: 100px;">
+                                    <label>Date Issued:</label>
+                                    <label style="font-weight: normal;">{{invoice.date_issued}}</label>
+                                    <br/>
+                                    <label>Payment Due:</label>
+                                    <label style="font-weight: normal;">{{invoice.payment_due}}</label>
+                                </div>
+
+                            </div>
+                            <table class="table table-striped invoice-items" align="center" style="margin-bottom: 100px;">
+                                  <tr>
+                                      
+                                      <th>Description</th>
+                                      <th>Qty</th>
+                                      <th>Cost</th>
+                                      <th >Total</th>
+                                  </tr>
+                                  <tr ng-repeat="item in invoice.items track by $index" jq:animate="dropdown;250">
+                                      
+                                        <td>{{item.description}}</td>
+                                        <td>{{item.qty}}</td>
+                                        <td>{{item.cost}}</td>
+                                        <td>{{item.cost * item.qty | currency}}</td>
+                                  </tr>                                  
+                            </table>
+                            <hr/>
+                            <div class="display-i-block">
+                                <label>Comments</label>
+                                <p>{{invoice.comments}}</p>
+                            </div>
+
+                            <div class="display-i-block invoice-total">
+                                <label>Subtotal</label>
+                                <label style="font-weight: normal;">{{getSubTotal()}}</label>
+                                <br/>
+                                <label>Tax (%)</label>
+                                <label style="font-weight: normal;">{{invoice.tax}}</label>
+                                <br/>
+                                <label>Total</label>
+                                <label style="font-weight: normal;">{{getGrandTotal()}}</label>
+                                
+                            </div>
+                            <br>
+                            <div style="margin-top: 100px;" class="invoice-actions">
+                                <input ng-click="Print()" class="btn btn-md btn-default no-print" value="Print" />
+                            </div>
+                        </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -21,11 +21,21 @@ angular.module('myApp.profile', ['ngRoute'])
 
 .controller('ProfileCtrl', ['$scope', '$location', '$rootScope', '$cookieStore', function($scope, $location, $rootScope, $cookieStore) {
 
-   $scope.selected = 1;
+    $scope.selected = 1;
+    $scope.user = {};
+    $scope.user.email = $rootScope.loggedUser.password.email;
 
     $scope.changeTab = function(event, item){
         event.preventDefault();
         console.log(item)
+    }
+
+    $scope.ChangePassword = function(){
+        alert("TODO")
+    }
+
+    $scope.ChangeUsername = function(){
+        alert("TODO")
     }
     
 }]);

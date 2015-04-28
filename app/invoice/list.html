@@ -88,15 +88,15 @@
         </div>
     </div>  
     <div class="container">
-        <div class="well col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+        <div ng-hide="emptyList" class="well col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
             <div ng-repeat="(key, invoice) in invoicesList">
                 <div class="row user-row">
                 <div class="col-xs-3 col-sm-2 col-md-1 col-lg-1">
                     
                 </div>
                 <div class="col-xs-8 col-sm-9 col-md-10 col-lg-10">
-                    <strong>{{ invoice.customer_name }}</strong><br>
-                    <span class="text-muted">Date: 12/05/2015</span>
+                    <strong>{{ invoice.to_company_name }}</strong><br>
+                    <span class="text-muted">Date issued: {{ invoice.date_issued }}</span>
                 </div>
                 <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 dropdown-user">
                     <i class="fa fa-circle-o-notch" ng-click="selectedItemList != $index ? selectedItemList = $index : selectedItemList = -1"></i>
@@ -110,25 +110,23 @@
                             <div class="row">
                                 
                                 <div class=" col-md-12 col-lg-12">
-                                    <strong>{{ invoice.customer_name }}</strong><br>
-                                    <hr>
                                     <table class="table table-user-information">
                                         <tbody>
                                         <tr>
                                             <td>Address:</td>
-                                            <td>{{ invoice.customer_address }}</td>
+                                            <td>{{ invoice.to_company_address }}</td>
                                         </tr>
                                         <tr>
-                                            <td>Registered since:</td>
-                                            <td>11/12/2013</td>
+                                            <td>Payment due:</td>
+                                            <td>{{ invoice.payment_due }}</td>
                                         </tr>
                                         <tr>
-                                            <td>Topics</td>
-                                            <td>15</td>
+                                            <td>Total:</td>
+                                            <td>{{getTax(invoice) + getSubTotal(invoice)}}</td>
                                         </tr>
                                         <tr>
-                                            <td>Warnings</td>
-                                            <td>0</td>
+                                            <td>Comments:</td>
+                                            <td>{{invoice.comments}}</td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -138,7 +136,9 @@
                         <div class="panel-footer">
                             
                             <span >
-                                <button class="btn btn-md btn-info" type="button"><i class="fa fa-eye"></i></button>
+                                <a href="#/invoice/print/{{key}}">
+                                    <button class="btn btn-md btn-info" type="button"><i class="fa fa-print"></i></button>
+                                </a>
                             </span>
                             <span >
                                 <a href="#/invoice/edit/{{key}}">
@@ -146,7 +146,7 @@
                                 </a>
                             </span>
                             <span >
-                                <button class="btn btn-md btn-danger" type="button" ng-click="DeleteInvoice($event, key)" ng-confirm-click="Are you sure you want to delete this invoice?"><i class="fa fa-trash"></i></button>
+                                <button class="btn btn-md btn-danger" type="button" ng-click="DeleteInvoice($event, key)" ><i class="fa fa-trash"></i></button>
                             </span>
                         </div>
                     </div>
@@ -154,6 +154,10 @@
                 </div>
                 <hr class="invoices-list-hr">
             </div>        
+        </div>
+        <div ng-show="emptyList" class="invoice-list-empty">
+            <h3>Nothing here!</h3>
+            <img class="img-responsive" src="img/submarine.png"/>
         </div>
         
     </div>

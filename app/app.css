@@ -320,13 +320,19 @@ footer .footer-below {
 }
 
 .form-title {
-    margin-top: 50px;
     color: white;
 }
 
 
+.invoice-list-empty{
+    text-align: center;
+}
 
-
+.invoice-list-empty img{
+    margin: auto;
+    width: 300px;
+    border-radius: 100px;
+}
 
 .whole a{
     font-size: 18px;
@@ -487,9 +493,9 @@ height: 40px;
     margin-top: 100px;
 }
 
+
 .invoice-list .well{
-    width: 80%;
-    margin-left: 10%;
+    width: 65%;
     border: 2px solid #2c3e50;
 }
 
@@ -733,4 +739,12 @@ height: 40px;
 
 .panel-footer{
     background-color: #CCDADD;
+}
+
+@media print
+{    
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
 }
