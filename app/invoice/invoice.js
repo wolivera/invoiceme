@@ -34,7 +34,9 @@ angular.module('myApp.invoice', ['ngRoute'])
 	var postsRef = firebaseRef.child("posts");
 	var username = $rootScope.loggedUser.password.email;
 
-	$scope.invoice = {};
+	$scope.invoice = {
+        username: username
+    };
 	$scope.editableInvoice = {};
 	$scope.invoice.username = username;
 	$scope.invoicesList = [];
@@ -52,17 +54,27 @@ angular.module('myApp.invoice', ['ngRoute'])
 	$scope.selectedItemList = -1;
     $scope.invoice.tax = 0.00;
     $scope.emptyList = false;
-
+    $scope.fullList = false;
 	
-	postsRef.on("value", function(snapshot) {
+	//postsRef.on("value", function(snapshot) {
+    postsRef.orderByChild("username").equalTo(username).on("value", function(snapshot){
 		$timeout(function(){
-			$scope.invoicesList = snapshot.val();
+            if(snapshot.val()){
+                var queryItems = snapshot.val();
+                $scope.invoiceKeys = Object.keys(queryItems);
+                var array = $.map(queryItems, function(value, index) {
+                    value.id = index;
+                    return [value];
+                });
+                $scope.invoicesList = array;
+            }
             $scope.emptyList = $scope.invoicesList.length == 0;
+            $scope.fullList = $scope.invoicesList.length > 0;
 			//if edit mode then search for invoice to edit
 			if($routeParams.id){
-				if($scope.invoicesList[$routeParams.id]){ // if route is not correct then redirect to list
+				if($scope.invoiceKeys.indexOf($routeParams.id) !== -1){ // if route is not correct then redirect to list
 					//$scope.editableInvoice = $scope.invoicesList[$routeParams.id]
-                    $scope.invoice = $scope.invoicesList[$routeParams.id]
+                    $scope.invoice = $scope.invoicesList[$scope.invoiceKeys.indexOf($routeParams.id)]
 				} else {
 					$location.path('/invoice/list').replace();
 				}
@@ -164,15 +176,16 @@ angular.module('myApp.invoice', ['ngRoute'])
 
 .directive("fileread", [function () {
     return {
-        scope: {
+        /*scope: {
             fileread: "="
-        },
-        link: function (scope, element, attributes) {
+        },*/
+        link: function ($scope, element, attributes) {
             element.bind("change", function (changeEvent) {
                 var reader = new FileReader();
                 reader.onload = function (loadEvent) {
-                    scope.$apply(function () {
-                        scope.fileread = loadEvent.target.result;
+                    $scope.$apply(function () {
+                        $scope.fileread = loadEvent.target.result;
+                        $scope.invoice.logo = loadEvent.target.result;
                         $('#company_logo').attr('src', loadEvent.target.result);
                     });
                 }

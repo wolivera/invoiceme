@@ -326,12 +326,19 @@ footer .footer-below {
 
 .invoice-list-empty{
     text-align: center;
+    margin-top: 40px;
 }
 
 .invoice-list-empty img{
     margin: auto;
     width: 300px;
     border-radius: 100px;
+}
+
+.invoice-list-empty button{
+    left: 0;
+    right: 0;
+    margin-top: 15px;
 }
 
 .whole a{
@@ -592,9 +599,9 @@ height: 40px;
     box-sizing: border-box;
 }
 
-.new-invoice .invoice-date{
+/*.new-invoice .invoice-date{
     margin-top: 15%;
-}
+}*/
 
 .new-invoice .invoice-date label{
     display: inline-block;

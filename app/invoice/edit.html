@@ -80,7 +80,7 @@
                             <div class="display-i-block company-logo">
                                 <!--input type='file' id="imgLogo" /-->
                                 <input type='file' fileread="my_company_logo" id="my_company_logo"/>
-                                <img ng-hide="logoRemoved" ng-model="invoice.my_company_logo" id="company_logo" src="img/cabin.png" alt="Your image" width="150" />
+                                <img ng-hide="logoRemoved" ng-model="invoice.my_company_logo" id="company_logo" src="{{invoice.logo}}" alt="Your image" width="150" />
                                 <br/>
                                 <div class="noPrint" ng-hide="printMode">
                                   <a ng-click="editLogo()" href >EDIT</a> /

@@ -30,9 +30,9 @@
                                 <br/>
                             </div>
                             <div class="display-i-block company-logo">
-                                <img ng-hide="logoRemoved" ng-model="invoice.my_company_logo" id="company_logo" src="img/cabin.png" alt="Your image" width="150" />
+                                <img ng-show="{{invoice.logo}}" ng-model="invoice.my_company_logo" id="company_logo" src="{{invoice.logo}}" alt="Your image" width="150" style="margin-bottom: 100px; margin-bottom: 15%;" />
                                 <br/>
-                                <div class="invoice-date" style="margin-top: 100px;">
+                                <div class="invoice-date" >
                                     <label>Date Issued:</label>
                                     <label style="font-weight: normal;">{{invoice.date_issued}}</label>
                                     <br/>
