@@ -19,11 +19,27 @@ angular.module('myApp.profile', ['ngRoute'])
     });
 }])
 
-.controller('ProfileCtrl', ['$scope', '$location', '$rootScope', '$cookieStore', function($scope, $location, $rootScope, $cookieStore) {
+.controller('ProfileCtrl', ['$scope', '$location', '$rootScope', '$cookieStore', '$timeout', function($scope, $location, $rootScope, $cookieStore, $timeout) {
+
+    var firebaseRef = new Firebase("https://myinvoice.firebaseio.com");
+    var postsRef = firebaseRef.child("posts");
 
     $scope.selected = 1;
     $scope.user = {};
     $scope.user.email = $rootScope.loggedUser.password.email;
+    $scope.user.invoicesCount = '-';
+
+    postsRef.orderByChild("username").equalTo($scope.user.email).on("value", function(snapshot){
+        $timeout(function(){
+            if(snapshot.val()){
+                var queryItems = snapshot.val();
+                $scope.user.invoicesCount = Object.keys(queryItems).length;
+            }
+        });
+    }, 
+    function (errorObject) {
+      console.log("The read failed: " + errorObject.code);
+    });
 
     $scope.changeTab = function(event, item){
         event.preventDefault();
@@ -31,11 +47,25 @@ angular.module('myApp.profile', ['ngRoute'])
     }
 
     $scope.ChangePassword = function(){
-        alert("TODO")
-    }
+        if($scope.user.new_password != $scope.user.new_password_confirm){
+            return alert("Passwords doesn't match")
+        }
 
-    $scope.ChangeUsername = function(){
-        alert("TODO")
+        firebaseRef.changePassword({
+          email: $scope.user.email,
+          oldPassword: $scope.user.old_password,
+          newPassword: $scope.user.new_password
+        }, 
+        function(error) {
+            if (error) {
+                console.log("Login Failed!", error);
+                return alert(error.message)
+            } else {
+                alert("Password successfully updated");
+                $location.path('/invoice/list').replace();
+                $scope.$apply();
+            }
+        });
     }
     
 }]);

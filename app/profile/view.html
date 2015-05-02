@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-sm-6 col-md-4 col-md-offset-4">
                 <ul class="nav nav-tabs" >
-                    <li ng-class="{'active' : selected == 1, 'inactive' : selected != 1}" ng-click="selected=1"><a data-toggle="tab">Edit Profile</a></li>
+                    <li ng-class="{'active' : selected == 1, 'inactive' : selected != 1}" ng-click="selected=1"><a data-toggle="tab">My profile</a></li>
                     <li ng-class="{'active' : selected == 2, 'inactive' : selected != 2 }" ng-click="selected=2" ><a data-toggle="tab">Change Password</a></li>
                 </ul>
                 
@@ -24,17 +24,29 @@
                  
                     <div id="my-tab-content" class="tab-content">
                         <div class="tab-pane" ng-class="{'active' : selected == 1 }" ng-click="selected=1"  id="login">
-                            <form class="form-signin" action="" method="">
-                              <input ng-model="user.email" type="text" class="form-control" required autofocus>
-                              <input ng-model="user.newemail" type="text" class="form-control" placeholder="Confirm new email" required>
-                              <input ng-click="ChangeUsername()" type="submit" class="btn btn-md btn-default btn-block" value="Update" />
-                            </form>
+                            <div class="row">
+                                
+                                <div class=" col-md-12 col-lg-12">
+                                    <table class="table table-user-information">
+                                        <tbody>
+                                        <tr>
+                                            <td>Username:</td>
+                                            <td>{{ user.email }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Invoices created:</td>
+                                            <td>{{ user.invoicesCount }}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                         <div class="tab-pane" ng-class="{'active' : selected == 2 }" ng-click="selected=2" id="profile">
                           <form class="form-signin" action="" method="">
                               <input ng-model="user.old_password" type="password" class="form-control" placeholder="Old password" required autofocus>
-                              <input ng-model="user.new_password" type="text" class="form-control" placeholder="New password" required>
-                              <input ng-model="user.new_password_confirm" type="text" class="form-control" placeholder="Confirm new password" required>
+                              <input ng-model="user.new_password" type="password" class="form-control" placeholder="New password" required>
+                              <input ng-model="user.new_password_confirm" type="password" class="form-control" placeholder="Confirm new password" required>
                               <input ng-click="ChangePassword()" type="submit" class="btn btn-md btn-default btn-block" value="Update" />
                           </form>
                         </div>            

@@ -26,7 +26,7 @@ angular.module('myApp', [
       var loggedUser = $cookieStore.get('loggedUser');
       if(!loggedUser){ // no logged user, we should be going to #login
 
-          if (next.templateUrl != "register/login.html" && next.templateUrl != "register/signup.html" && next.templateUrl != "home/home.html") {
+          if (next.templateUrl != "register/login.html" && next.templateUrl != "register/signup.html" && next.templateUrl != "home/home.html" && next.templateUrl != "invoice/list.html" && next.templateUrl != "invoice/new.html") {
             // not going to #login, we should redirect now
             $location.path( "/login" );
           }

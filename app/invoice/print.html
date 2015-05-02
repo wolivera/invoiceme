@@ -30,7 +30,7 @@
                                 <br/>
                             </div>
                             <div class="display-i-block company-logo">
-                                <img ng-show="{{invoice.logo}}" ng-model="invoice.my_company_logo" id="company_logo" src="{{invoice.logo}}" alt="Your image" width="150" style="margin-bottom: 100px; margin-bottom: 15%;" />
+                                <img ng-show="invoice.logo != null" ng-model="invoice.my_company_logo" id="company_logo" src="{{invoice.logo}}" alt="Your image" width="150" style="margin-bottom: 100px; margin-bottom: 15%;" />
                                 <br/>
                                 <div class="invoice-date" >
                                     <label>Date Issued:</label>

@@ -32,7 +32,7 @@ angular.module('myApp.invoice', ['ngRoute'])
 
 	var firebaseRef = new Firebase("https://myinvoice.firebaseio.com");
 	var postsRef = firebaseRef.child("posts");
-	var username = $rootScope.loggedUser.password.email;
+	var username = $rootScope.loggedUser ? $rootScope.loggedUser.password.email : '';
 
 	$scope.invoice = {
         username: username
@@ -116,7 +116,9 @@ angular.module('myApp.invoice', ['ngRoute'])
 
 	$scope.CreateInvoice = function(e){ 
 	    e.preventDefault();
-        //$scope.invoice.company_logo = $scope.fileread;
+        if($scope.logoRemoved){
+            $scope.invoice.logo = null;
+        }
 	    postsRef.push($scope.invoice);
 	    $location.path('/invoice/list').replace();
 		$scope.$apply();
@@ -124,7 +126,9 @@ angular.module('myApp.invoice', ['ngRoute'])
 
 	$scope.EditInvoice = function(e){
 		e.preventDefault();
-
+        if($scope.logoRemoved){
+            $scope.invoice.logo = null;
+        }
 		var itemRef = postsRef.child($routeParams.id);
 		itemRef.update($scope.invoice);
 		$location.path('/invoice/list').replace();
@@ -135,9 +139,13 @@ angular.module('myApp.invoice', ['ngRoute'])
 
         var result = $window.confirm("Are you sure you want to remove this invoice?");
         if (result) {
-    		var itemRef = postsRef.child(key);
-    		itemRef.remove();
-    		$location.path('/invoice/list').replace();
+            if($rootScope.loggedUser){
+        		var itemRef = postsRef.child(key);
+        		itemRef.remove();
+        		$location.path('/invoice/list').replace();
+            } else {
+                $location.path('/login').replace();
+            }
         }
 	}
 
@@ -162,8 +170,6 @@ angular.module('myApp.invoice', ['ngRoute'])
           subTotal += (item.qty * item.cost);
         });        
         var tax = (parseInt(invoice.tax) * subTotal)/100;
-        console.log(invoice.tax)
-        console.log(tax)
         return tax + subTotal;
     }
 
