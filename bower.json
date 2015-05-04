@@ -1,10 +1,8 @@
 {
-  "name": "angular-seed",
-  "description": "A starter project for AngularJS",
-  "version": "0.0.0",
-  "homepage": "https://github.com/angular/angular-seed",
-  "license": "MIT",
-  "private": true,
+  "name": "InvoiceMe",
+  "description": "Free to use, open source invoice register tool built using AngularJS and Firebase JS.",
+  "version": "0.0.1",
+  "private": false,
   "dependencies": {
     "angular": "1.2.x",
     "angular-route": "1.2.x",

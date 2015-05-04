@@ -17,6 +17,7 @@
             <input ng-model="searchText" class="form-control" placeholder="Search...">
         </div>
         <br/>
+        <div id="spin"></div>
         <div ng-show="fullList" class="well col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">            
             <div ng-repeat="invoice in invoicesList | filter:searchText">
                 <div class="row user-row">

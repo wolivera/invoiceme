@@ -1,10 +1,9 @@
 {
-  "name": "angular-seed",
-  "private": true,
-  "version": "0.0.0",
-  "description": "A starter project for AngularJS",
+  "name": "InvoiceMe",
+  "private": false,
+  "version": "0.0.1",
+  "description": "Free to use, open source invoice register tool built using AngularJS and Firebase JS.",
   "repository": "https://github.com/angular/angular-seed",
-  "license": "MIT",
   "devDependencies": {
     "karma": "~0.10",
     "protractor": "^1.1.1",
@@ -14,9 +13,9 @@
     "karma-junit-reporter": "^0.2.2"
   },
   "scripts": {
-    "postinstall": "bower install",
+    "postinstall": "./node_modules/bower/bin/bower install",
+    "start": "http-server -a localhost -p 8000 -c-1",
     "prestart": "npm install",
-    "start": "http-server -a localhost -p 8080 -c-1",
     "pretest": "npm install",
     "test": "karma start karma.conf.js",
     "test-single-run": "karma start karma.conf.js  --single-run",
@@ -27,6 +26,9 @@
     "update-index-async": "node -e \"require('shelljs/global'); sed('-i', /\\/\\/@@NG_LOADER_START@@[\\s\\S]*\\/\\/@@NG_LOADER_END@@/, '//@@NG_LOADER_START@@\\n' + sed(/sourceMappingURL=angular-loader.min.js.map/,'sourceMappingURL=bower_components/angular-loader/angular-loader.min.js.map','app/bower_components/angular-loader/angular-loader.min.js') + '\\n//@@NG_LOADER_END@@', 'app/index-async.html');\""
   },
   "dependencies": {
-    "firebase": "~2.1.2"
+    "bower": "^1.4.1",
+    "express": "^4.12.3",
+    "firebase": "~2.1.2",
+    "http-server": "^0.8.0"
   }
 }

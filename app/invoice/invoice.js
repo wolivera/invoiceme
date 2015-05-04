@@ -33,6 +33,8 @@ angular.module('myApp.invoice', ['ngRoute'])
 	var firebaseRef = new Firebase("https://myinvoice.firebaseio.com");
 	var postsRef = firebaseRef.child("posts");
 	var username = $rootScope.loggedUser ? $rootScope.loggedUser.password.email : '';
+    var spinner = new Spinner({color: '#ddd'});
+    spinner.spin(document.getElementById('spin'));
 
 	$scope.invoice = {
         username: username
@@ -59,6 +61,8 @@ angular.module('myApp.invoice', ['ngRoute'])
 	//postsRef.on("value", function(snapshot) {
     postsRef.orderByChild("username").equalTo(username).on("value", function(snapshot){
 		$timeout(function(){
+            spinner.stop();
+            
             if(snapshot.val()){
                 var queryItems = snapshot.val();
                 $scope.invoiceKeys = Object.keys(queryItems);
