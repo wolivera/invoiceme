@@ -13,8 +13,12 @@
         </div>
     </div>  
     <div class="container">
-        <div ng-show="fullList" class="well col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
-            <div ng-repeat="invoice in invoicesList">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-xs-offset-6 col-sm-offset-6 col-md-offset-6" ng-show="fullList" style="margin-bottom: 20px;">
+            <input ng-model="searchText" class="form-control" placeholder="Search...">
+        </div>
+        <br/>
+        <div ng-show="fullList" class="well col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">            
+            <div ng-repeat="invoice in invoicesList | filter:searchText">
                 <div class="row user-row">
                 <div class="col-xs-3 col-sm-2 col-md-1 col-lg-1">
                     

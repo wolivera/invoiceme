@@ -16,7 +16,7 @@
             <div id="my-tab-content" class="tab-content">
                 <div class="tab-pane active" id="login">
                         <form  action="">
-                            <div class="display-i-block">
+                            <div class="display-i-block" style="width:35%;">
                                 <label>From</label>
                                 <input ng-model="invoice.my_company_name" type="text" class="form-control" placeholder="Your company name" required autofocus>
                                 <textarea ng-model="invoice.my_company_address" rows="5" class="form-control" placeholder="Your company address"></textarea>
@@ -25,7 +25,7 @@
                                 <input ng-model="invoice.to_company_name" type="text" class="form-control" placeholder="Customer name" required>
                                 <textarea ng-model="invoice.to_company_address" rows="5" class="form-control" placeholder="Customer address"></textarea>
                             </div>
-                            <div class="display-i-block company-logo">
+                            <div class="display-i-block company-logo" style="width:60%;">
                                 <!--input type='file' id="imgLogo" /-->
                                 <input type='file' fileread="my_company_logo" id="my_company_logo"/>
                                 <img ng-hide="logoRemoved" ng-model="invoice.my_company_logo" id="company_logo" src="{{invoice.logo ? invoice.logo : 'img/cabin.png' }}" alt="Your image" width="150" />
@@ -71,7 +71,7 @@
                                   
                             </table>
                             <hr/>
-                            <div class="display-i-block">
+                            <div class="display-i-block" style="margin-bottom: 50px;">
                                 <label>Comments</label>
                                 <textarea ng-model="invoice.comments" rows="5" cols="40" class="form-control" placeholder="Your company address"></textarea>
                             </div>

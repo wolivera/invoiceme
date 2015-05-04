@@ -15,7 +15,7 @@
             <div id="my-tab-content" class="tab-content">
                 <div class="tab-pane active" id="login">
                         <form  action="">
-                            <div class="display-i-block">
+                            <div class="display-i-block invoice-people" style="width:35%;">
                                 <div style="min-height: 150px;">
                                     <label>From</label>
                                     <p>{{invoice.my_company_name}}</p>
@@ -29,7 +29,7 @@
                                 </div>
                                 <br/>
                             </div>
-                            <div class="display-i-block company-logo">
+                            <div class="display-i-block company-logo" style="width:60%;">
                                 <img ng-show="invoice.logo != null" ng-model="invoice.my_company_logo" id="company_logo" src="{{invoice.logo}}" alt="Your image" width="150" style="margin-bottom: 100px; margin-bottom: 15%;" />
                                 <br/>
                                 <div class="invoice-date" >
@@ -58,21 +58,23 @@
                                   </tr>                                  
                             </table>
                             <hr/>
-                            <div class="display-i-block">
-                                <label>Comments</label>
-                                <p>{{invoice.comments}}</p>
-                            </div>
+                            <div class="row">
+                                <div class="display-i-block invoice-comments" style="margin-bottom: 50px; width: 25%;">
+                                    <label>Comments</label>
+                                    <p>{{invoice.comments}}</p>
+                                </div>
 
-                            <div class="display-i-block invoice-total">
-                                <label>Subtotal</label>
-                                <label style="font-weight: normal;">{{getSubTotal()}}</label>
-                                <br/>
-                                <label>Tax (%)</label>
-                                <label style="font-weight: normal;">{{invoice.tax}}</label>
-                                <br/>
-                                <label>Total</label>
-                                <label style="font-weight: normal;">{{getGrandTotal()}}</label>
-                                
+                                <div class="display-i-block invoice-total">
+                                    <label>Subtotal</label>
+                                    <label style="font-weight: normal;">{{getSubTotal()}}</label>
+                                    <br/>
+                                    <label>Tax (%)</label>
+                                    <label style="font-weight: normal;">{{invoice.tax}}</label>
+                                    <br/>
+                                    <label>Total</label>
+                                    <label style="font-weight: normal;">{{getGrandTotal()}}</label>
+                                    
+                                </div>
                             </div>
                             <br>
                             <div style="margin-top: 100px;" class="invoice-actions">

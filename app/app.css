@@ -924,10 +924,26 @@ height: 40px;
     background-color: #CCDADD;
 }
 
+
 @media print
 {    
     .no-print, .no-print *
     {
         display: none !important;
+    }
+    .invoice-date{
+        min-width: 500px;
+    }
+    .invoice-people{
+        width: 30%;
+    }
+    .company-logo{
+        width: 65%;
+    }
+    .invoice-comments{
+        width: 25%;
+    }
+    .invoice-total{
+        width: 60%
     }
 }
