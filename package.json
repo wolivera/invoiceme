@@ -14,7 +14,6 @@
   },
   "scripts": {
     "postinstall": "./node_modules/bower/bin/bower install",
-    "start": "http-server -a localhost -p 8000 -c-1",
     "prestart": "npm install",
     "pretest": "npm install",
     "test": "karma start karma.conf.js",
@@ -28,7 +27,6 @@
   "dependencies": {
     "bower": "^1.4.1",
     "express": "^4.12.3",
-    "firebase": "~2.1.2",
-    "http-server": "^0.8.0"
+    "firebase": "~2.1.2"
   }
 }
