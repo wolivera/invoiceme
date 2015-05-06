@@ -1,5 +1,6 @@
 {
   "name": "InvoiceMe",
+  "author": "Williams Olivera <wolivera@codigodelsur.com>",
   "private": false,
   "version": "0.0.1",
   "description": "Free to use, open source invoice register tool built using AngularJS and Firebase JS.",
